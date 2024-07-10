@@ -1,13 +1,13 @@
 import React from 'react';
-import BmiCalculator from '../components/Bmi';
+import Bmi from '../components/Bmi';
 
-const Home = () => {
+const BMICalculator = () => {
 
   return (
     <>
-    <BmiCalculator/>
+    <Bmi/>
     </>
   );
 };
 
-export default Home;
+export default BMICalculator;
