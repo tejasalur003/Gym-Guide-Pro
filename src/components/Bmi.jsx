@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import BMIResult from './BmiResult'; // Assuming BMIResult component is properly imported and named
-import bmiImg from '../assets/images/banner.png';
+import bmiImg from '../assets/images/bmi2.jpg';
 
 const BMICalculator = () => {
   const [gender, setGender] = useState('');
@@ -42,14 +42,14 @@ const BMICalculator = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center min-h-screen bg-gray-200">
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="relative flex flex-col items-center m-10 justify-center bg-white rounded-lg shadow-lg 
-        p-10 w-full max-w-2xl h-auto bg-cover bg-center z-10" style={{ backgroundImage: `url(${bmiImg})` }}>
-          <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div> {/* Faded overlay */}
-          <h2 className="text-4xl font-bold mb-6 relative ">BMI Calculator</h2>
+        p-10 w-full max-w-3xl h-auto bg-cover bg-center z-10" style={{ backgroundImage: `url(${bmiImg})` }}>
+          <div className="absolute inset-0 bg-black opacity-30 rounded-lg"></div> {/* Faded overlay */}
+          <h2 className="text-4xl font-bold mb-6 relative text-orange-500">BMI Calculator</h2>
 
           <div className="mb-6 w-full relative z-10">
-            <label className="block mb-2">Gender:</label>
+            <label className="block mb-2 text-white font-semibold">Gender:</label>
             <select
               className="px-4 py-3 border rounded-lg w-full focus:border-black"
               value={gender}
@@ -63,7 +63,7 @@ const BMICalculator = () => {
           </div>
 
           <div className="mb-6 w-full relative z-10">
-            <label className="block mb-2">Age:</label>
+            <label className="block mb-2 text-white font-semibold">Age:</label>
             <input
               type="number"
               className="px-4 py-3 border rounded-lg w-full"
@@ -74,7 +74,7 @@ const BMICalculator = () => {
           </div>
 
           <div className="mb-6 w-full relative z-10">
-            <label className="block mb-2">Height (cm):</label>
+            <label className="block mb-2 text-white font-semibold">Height (cm):</label>
             <input
               type="number"
               className="px-4 py-3 border rounded-lg w-full"
@@ -85,7 +85,7 @@ const BMICalculator = () => {
           </div>
 
           <div className="mb-6 w-full relative z-10">
-            <label className="block mb-2">Weight (kg):</label>
+            <label className="block mb-2 text-white font-semibold">Weight (kg):</label>
             <input
               type="number"
               className="px-4 py-3 border rounded-lg w-full"
@@ -116,7 +116,7 @@ const BMICalculator = () => {
 
       <div ref={resultRef} className={`transition-opacity duration-500 ${bmiResult !== null ? 'opacity-100' : 'opacity-0'}`}>
         {bmiResult !== null && (
-          <BMIResult bmi={bmiResult} height={height}/>
+          <BMIResult bmi={bmiResult} height={height} />
         )}
       </div>
     </>
