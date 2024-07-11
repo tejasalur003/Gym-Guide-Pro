@@ -9,6 +9,7 @@ import ExerciseDetail from './pages/ExerciseDetail';
 import BmiCalculator from './pages/BMICalculator';
 import Home from './pages/Home';
 import Planner from './pages/Planner';
+import WorkoutPlan from './components/WorkoutPlan';
 
 const App = () => (
   <>
@@ -18,6 +19,8 @@ const App = () => (
       <Route path="/exercise/:id" element={<ExerciseDetail />} />
       <Route path="/bmi" element={<BmiCalculator/>} />
       <Route path="/planner" element={<Planner/>} />
+      <Route path="/workout-split" element={<WorkoutPlan/>} />
+      
     </Routes>
    <Footer />
   </>

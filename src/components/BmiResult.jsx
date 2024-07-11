@@ -39,7 +39,8 @@ const BMIResult = ({ bmi, height }) => {
   }
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-xl mx-auto my-10">
+    <div className='bg-gray-100 p-5'>
+      <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-xl mx-auto mb-12">
       <h2 className="text-3xl font-bold mb-6 text-center text-white">Result</h2>
       <div className="overflow-x-auto">
         <table className="table-auto w-full bg-gray-900 text-white rounded-lg">
@@ -53,6 +54,8 @@ const BMIResult = ({ bmi, height }) => {
           </tbody>
         </table>
       </div>
+    </div>
+
     </div>
   );
 };
