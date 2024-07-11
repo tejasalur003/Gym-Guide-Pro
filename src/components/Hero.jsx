@@ -24,22 +24,22 @@ const ExploreButton = () => {
 const Hero = () => (
   <div className="relative bg-black text-white py-20 lg:px-20 px-6">
     {/* Gym Images Grid */}
-    <div className="absolute top-0 left-0 w-1/2 h-full opacity-30 z-10">
+    <div className="absolute top-0 left-0 w-1/2 h-full opacity-40 z-10">
       <img src={GymImage1} alt="Gym" className="object-cover w-full h-full" />
     </div>
    
-    <div className="absolute top-0 right-0 w-1/2 h-full opacity-30 z-10">
+    <div className="absolute top-0 right-0 w-1/2 h-full opacity-40 z-10">
       <img src={GymImage2} alt="Gym" className="object-cover w-full h-full" />
     </div>
 
     {/* Text Content */}
     <div className="max-w-4xl mx-auto text-center z-20 relative">
       <h1 className="text-3xl lg:text-5xl font-bold mb-6 text-orange-500">Fitness Club</h1>
-      <h2 className="text-4xl lg:text-6xl font-extrabold mb-6">
+      <h2 className="text-4xl lg:text-5xl font-extrabold mb-6">
         Sweat, Smile <br /> And Repeat
       </h2>
-      <p className="text-lg lg:text-xl mb-8 leading-relaxed">
-        Check out the most effective exercises personalized to you
+      <p className="text-2xl lg:text-2xl mb-6 leading-relaxed">
+        Check out the most Effective Exercises Personalized to You
       </p>
 
       <ExploreButton />
