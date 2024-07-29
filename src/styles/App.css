@@ -1,16 +1,7 @@
 body {
   font-family: 'Montserrat', sans-serif;
-  /* background-color: #e9a05b; Yellowish-orange themed background */
 }
-  /* 
-  * {
-    padding: 0px;
-    margin: 0px; 
-     box-sizing: border-box; 
-    /background:#FF2625;
-  }
-   */
-  
+
   ::-webkit-scrollbar {
     width: 0px;
   }
@@ -53,17 +44,6 @@ body {
     width: 729px;
     height: 742px;
   }
-/*   
-  .hero-banner-img {
-    position: absolute;
-    right: 40px;
-    top: 0px;
-    width: 700px;
-    height: 900px;
-    margin-top: -330px;
-  
-  } */
-  
   .exercise-card {
     width: 400px;
     height: 445px;

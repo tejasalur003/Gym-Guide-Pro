@@ -1,73 +1,125 @@
-// src/components/Exercises.js
-export const exercises = {
+export const generateWorkoutPlan = (fitnessLevel, fitnessGoal, workoutDays, equipment) => {
+  const workoutPlan = [];
+  const exercises = {
     beginner: {
-      loseWeight: [
+      'lose weight': [
         { name: 'Squats', sets: 3, reps: 12 },
         { name: 'Push-ups', sets: 3, reps: 12 },
         { name: 'Lunges', sets: 3, reps: 12 },
-        { name: 'Plank', sets: 3, reps: '30 seconds' },
-        { name: 'Jump Rope', sets: 3, reps: '1 minute' },
+        { name: 'Plank', sets: 3, reps: '30s' },
+        { name: 'Jump Rope', sets: 3, reps: '1 min' },
+        { name: 'Burpees', sets: 3, reps: 10 },
+        { name: 'Mountain Climbers', sets: 3, reps: 20 },
       ],
-      buildMuscle: [
+      'build muscle': [
         { name: 'Bench Press', sets: 3, reps: 8 },
         { name: 'Lat Pulldowns', sets: 3, reps: 12 },
         { name: 'Bicep Curls', sets: 3, reps: 12 },
-        { name: 'Leg Press', sets: 3, reps: 12 },
+        { name: 'Deadlifts', sets: 3, reps: 8 },
+        { name: 'Shoulder Press', sets: 3, reps: 12 },
         { name: 'Tricep Dips', sets: 3, reps: 12 },
+        { name: 'Leg Press', sets: 3, reps: 10 },
       ],
-      improveEndurance: [
+      'improve endurance': [
         { name: 'Jumping Jacks', sets: 3, reps: 30 },
         { name: 'Burpees', sets: 3, reps: 12 },
         { name: 'Mountain Climbers', sets: 3, reps: 30 },
-        { name: 'Cycling', sets: 1, reps: '10km' },
-        { name: 'Swimming', sets: 1, reps: '500m' },
+        { name: 'High Knees', sets: 3, reps: '1 min' },
+        { name: 'Running', sets: 3, reps: '5 min' },
+        { name: 'Rowing', sets: 3, reps: '3 min' },
+        { name: 'Cycling', sets: 3, reps: '5 min' },
       ],
     },
     intermediate: {
-      loseWeight: [
-        { name: 'Deadlifts', sets: 4, reps: 10 },
-        { name: 'Pull-ups', sets: 4, reps: 8 },
+      'lose weight': [
+        { name: 'Squat Jumps', sets: 4, reps: 15 },
+        { name: 'Incline Push-ups', sets: 4, reps: 15 },
+        { name: 'Walking Lunges', sets: 4, reps: 20 },
+        { name: 'Plank with Shoulder Tap', sets: 4, reps: '30s' },
+        { name: 'High Knees', sets: 4, reps: '1 min' },
+        { name: 'Kettlebell Swings', sets: 4, reps: 15 },
+        { name: 'Russian Twists', sets: 4, reps: 20 },
+      ],
+      'build muscle': [
+        { name: 'Incline Bench Press', sets: 4, reps: 10 },
+        { name: 'Pull-ups', sets: 4, reps: 10 },
+        { name: 'Hammer Curls', sets: 4, reps: 15 },
+        { name: 'Romanian Deadlifts', sets: 4, reps: 10 },
+        { name: 'Lateral Raises', sets: 4, reps: 15 },
+        { name: 'Chest Flyes', sets: 4, reps: 12 },
+        { name: 'Cable Rows', sets: 4, reps: 12 },
+      ],
+      'improve endurance': [
         { name: 'Box Jumps', sets: 4, reps: 15 },
-        { name: 'Sprints', sets: 3, reps: '200m' },
-        { name: 'Jump Squats', sets: 3, reps: 15 },
-      ],
-      buildMuscle: [
-        { name: 'Squats', sets: 4, reps: 10 },
-        { name: 'Overhead Press', sets: 4, reps: 8 },
-        { name: 'Dips', sets: 4, reps: 12 },
-        { name: 'Leg Curls', sets: 3, reps: 12 },
-        { name: 'Chest Flyes', sets: 3, reps: 12 },
-      ],
-      improveEndurance: [
-        { name: 'Running', sets: 1, reps: '10km' },
-        { name: 'Cycling', sets: 1, reps: '30km' },
-        { name: 'Rowing', sets: 3, reps: '3000m' },
-        { name: 'Jump Rope', sets: 3, reps: '2 minutes' },
-        { name: 'Battle Ropes', sets: 3, reps: 30 },
+        { name: 'Burpee to Pull-up', sets: 4, reps: 15 },
+        { name: 'Spider-Man Climbers', sets: 4, reps: 20 },
+        { name: 'Sprints', sets: 4, reps: '30s' },
+        { name: 'Jump Rope', sets: 4, reps: '2 min' },
+        { name: 'Treadmill Intervals', sets: 4, reps: '5 min' },
+        { name: 'Battle Ropes', sets: 4, reps: '1 min' },
       ],
     },
     advanced: {
-      loseWeight: [
-        { name: 'Clean and Press', sets: 5, reps: 6 },
-        { name: 'Snatch', sets: 5, reps: 6 },
-        { name: 'Plyometric Push-ups', sets: 5, reps: 15 },
-        { name: 'Box Jumps', sets: 5, reps: 10 },
-        { name: 'Sprints', sets: 3, reps: '400m' },
+      'lose weight': [
+        { name: 'Plyometric Squats', sets: 5, reps: 20 },
+        { name: 'Decline Push-ups', sets: 5, reps: 20 },
+        { name: 'Bulgarian Split Squats', sets: 5, reps: 20 },
+        { name: 'Plank to Push-up', sets: 5, reps: '1 min' },
+        { name: 'Sprint Intervals', sets: 5, reps: '30s' },
+        { name: 'Medicine Ball Slams', sets: 5, reps: 15 },
+        { name: 'Agility Ladder Drills', sets: 5, reps: '1 min' },
       ],
-      buildMuscle: [
-        { name: 'Front Squats', sets: 5, reps: 6 },
-        { name: 'Weighted Pull-ups', sets: 5, reps: 8 },
-        { name: 'Barbell Rows', sets: 5, reps: 10 },
-        { name: 'Romanian Deadlifts', sets: 4, reps: 12 },
-        { name: 'Incline Bench Press', sets: 4, reps: 10 },
+      'build muscle': [
+        { name: 'Weighted Bench Press', sets: 5, reps: 6 },
+        { name: 'Weighted Pull-ups', sets: 5, reps: 6 },
+        { name: 'Barbell Curls', sets: 5, reps: 10 },
+        { name: 'Sumo Deadlifts', sets: 5, reps: 6 },
+        { name: 'Arnold Press', sets: 5, reps: 10 },
+        { name: 'Cable Crossovers', sets: 5, reps: 12 },
+        { name: 'Tricep Extensions', sets: 5, reps: 10 },
       ],
-      improveEndurance: [
-        { name: 'HIIT', sets: 1, reps: '30 minutes' },
-        { name: 'CrossFit Circuit', sets: 1, reps: '20 minutes' },
-        { name: 'Sprint Intervals', sets: 8, reps: '200m' },
-        { name: 'Tabata Burpees', sets: 1, reps: '4 minutes' },
-        { name: 'Swimming Intervals', sets: 5, reps: '200m' },
+      'improve endurance': [
+        { name: 'Tuck Jumps', sets: 5, reps: 20 },
+        { name: 'Burpee Pull-ups', sets: 5, reps: 20 },
+        { name: 'Skater Hops', sets: 5, reps: 30 },
+        { name: 'Battle Ropes', sets: 5, reps: '1 min' },
+        { name: 'Hill Sprints', sets: 5, reps: '1 min' },
+        { name: 'Tabata Cycling', sets: 5, reps: '4 min' },
+        { name: 'Rowing Intervals', sets: 5, reps: '4 min' },
       ],
     },
   };
-  
+
+
+  let aggregatedExercises = [...exercises[fitnessLevel][fitnessGoal]];
+
+  if (fitnessLevel === 'intermediate') {
+    aggregatedExercises = [
+      ...exercises['beginner'][fitnessGoal],
+      ...aggregatedExercises,
+    ];
+  } else if (fitnessLevel === 'advanced') {
+    aggregatedExercises = [
+      ...exercises['beginner'][fitnessGoal],
+      ...exercises['intermediate'][fitnessGoal],
+      ...aggregatedExercises,
+    ];
+  }
+
+  for (let i = 0; i < workoutDays; i++) {
+    const day = {
+      exercises: [],
+    };
+
+    const numberOfExercisesPerDay = Math.ceil(aggregatedExercises.length / workoutDays);
+
+    for (let j = 0; j < numberOfExercisesPerDay; j++) {
+      const exerciseIndex = (i * numberOfExercisesPerDay + j) % aggregatedExercises.length;
+      day.exercises.push(aggregatedExercises[exerciseIndex]);
+    }
+
+    workoutPlan.push(day);
+  }
+
+  return workoutPlan;
+};

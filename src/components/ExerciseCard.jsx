@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
+
+
 const ExerciseCard = ({ exercise }) => (
   <Link className="exercise-card bg-orange-500 rounded-lg shadow-lg overflow-hidden flex flex-col items-start" to={`/exercise/${exercise.id}`}>
     <img src={exercise.gifUrl} alt={exercise.name} loading="lazy" className="w-full" />
