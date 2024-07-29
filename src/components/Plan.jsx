@@ -1,190 +1,142 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { formFields } from "../constants/content";
 
 const Plan = () => {
-  const [gender, setGender] = useState('');
-  const [unit, setUnit] = useState('lbs');
-  const [bodyweight, setBodyweight] = useState('');
-  const [fitnessLevel, setFitnessLevel] = useState('');
-  const [fitnessGoal, setFitnessGoal] = useState('');
-  const [workoutDays, setWorkoutDays] = useState(3);
-  const [equipment, setEquipment] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false); // State to track form validity
-  const [isSubmitted, setIsSubmitted] = useState(false); // State to track submission attempt
-  const [showWarning, setShowWarning] = useState(false); // State to control warning message
+  const [formData, setFormData] = useState({
+    gender: '',
+    unit: 'lbs',
+    bodyweight: '',
+    fitnessLevel: '',
+    fitnessGoal: '',
+    workoutDays: 3,
+    equipment: '',
+  });
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
   const navigate = useNavigate();
 
-  // Function to handle form validation
-  const validateForm = useCallback(() => {
-    if (fitnessLevel && fitnessGoal && workoutDays && equipment) {
-      setIsFormValid(true);
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    if (type === 'radio') {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: checked ? value : prevData[name],
+      }));
     } else {
-      setIsFormValid(false);
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
     }
-  }, [fitnessLevel, fitnessGoal, workoutDays, equipment]); // useCallback dependencies
+  };
 
-  // Handle form validation on every state change
+  const validateForm = useCallback(() => {
+    const { fitnessLevel, fitnessGoal, workoutDays, equipment } = formData;
+    setIsFormValid(fitnessLevel && fitnessGoal && workoutDays && equipment);
+  }, [formData]);
+
   useEffect(() => {
     validateForm();
-  }, [validateForm]); // useEffect dependency
+  }, [validateForm]);
 
   const handleGenerateWorkout = () => {
-    setIsSubmitted(true); // Mark form submission attempt
-
-    // Check if form is valid before navigating or showing warning
     if (isFormValid) {
-      const workoutData = {
-        gender,
-        unit,
-        bodyweight,
-        fitnessLevel,
-        fitnessGoal,
-        workoutDays,
-        equipment,
-      };
-      navigate('/workout-split', { state: workoutData });
+      navigate('/workout-split', { state: formData });
     } else {
-      setShowWarning(true); // Display warning message
+      setShowWarning(true);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-orange-400 to-orange-600 p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-orange-400 to-orange-600 p-6">
+      <h1 className="text-4xl font-extrabold text-white mb-8 shadow-md">Let's Build Your Perfect Workout Plan!</h1>
       <div className="bg-black text-white p-8 rounded-lg shadow-lg w-full max-w-lg">
-        <h1 className="text-2xl font-bold mb-4">Get started</h1>
+        <h2 className="text-3xl font-bold mb-6">Get Started</h2>
         <p className="mb-6">Tell us about yourself to create your first custom workout</p>
 
-        <div className="mb-4">
-          <label className="block mb-2">Gender</label>
-          <div className="flex items-center">
-            <label className="mr-4">
-              <input
-                type="radio"
-                name="gender"
-                value="male"
-                checked={gender === 'male'}
-                onChange={(e) => setGender(e.target.value)}
-                className="mr-2"
-              />
-              Male
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="gender"
-                value="female"
-                checked={gender === 'female'}
-                onChange={(e) => setGender(e.target.value)}
-                className="mr-2"
-              />
-              Female
-            </label>
-          </div>
-        </div>
+        {Object.entries(formFields).map(([key, field]) => {
+          switch (field.type) {
+            case 'radio':
+              return (
+                <div key={key} className="mb-4">
+                  <label className="block mb-2 font-semibold">{field.label}</label>
+                  <div className="flex items-center">
+                    {field.options.map((option) => (
+                      <label key={option.value} className="mr-4 flex items-center">
+                        <input
+                          type="radio"
+                          name={key}
+                          value={option.value}
+                          checked={formData[key] === option.value}
+                          onChange={handleChange}
+                          className="mr-2"
+                        />
+                        {option.label}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              );
+            case 'select':
+              return (
+                <div key={key} className="mb-4">
+                  <label className="block mb-2 font-semibold">{field.label}</label>
+                  <select
+                    name={key}
+                    value={formData[key]}
+                    onChange={handleChange}
+                    className="w-full p-2 rounded-lg text-black"
+                  >
+                    {field.options.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              );
+            case 'range':
+              return (
+                <div key={key} className="mb-4">
+                  <label className="block mb-2 font-semibold">{field.label}</label>
+                  <input
+                    type="range"
+                    name={key}
+                    min={field.min}
+                    max={field.max}
+                    value={formData[key]}
+                    onChange={handleChange}
+                    className="w-full"
+                  />
+                  <div className="text-center mt-2">{formData[key]} days</div>
+                </div>
+              );
+            case 'number':
+              return (
+                <div key={key} className="mb-4">
+                  <label className="block mb-2 font-semibold">{field.label}</label>
+                  <input
+                    type="number"
+                    name={key}
+                    value={formData[key]}
+                    onChange={handleChange}
+                    className="w-full p-2 rounded-lg text-black"
+                  />
+                </div>
+              );
+            default:
+              return null;
+          }
+        })}
 
-        <div className="mb-4">
-          <label className="block mb-2">Unit of Measurement</label>
-          <div className="flex items-center">
-            <label className="mr-4">
-              <input
-                type="radio"
-                name="unit"
-                value="lbs"
-                checked={unit === 'lbs'}
-                onChange={(e) => setUnit(e.target.value)}
-                className="mr-2"
-              />
-              Lbs
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="unit"
-                value="kgs"
-                checked={unit === 'kgs'}
-                onChange={(e) => setUnit(e.target.value)}
-                className="mr-2"
-              />
-              Kgs
-            </label>
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="block mb-2">Bodyweight</label>
-          <input
-            type="number"
-            value={bodyweight}
-            onChange={(e) => setBodyweight(e.target.value)}
-            className="w-full p-2 rounded-lg text-black"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block mb-2">Fitness Level</label>
-          <select
-            value={fitnessLevel}
-            onChange={(e) => setFitnessLevel(e.target.value)}
-            className="w-full p-2 rounded-lg text-black"
-          >
-            <option value="">Select your fitness level</option>
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
-          </select>
-        </div>
-
-        <div className="mb-4">
-          <label className="block mb-2">Fitness Goal</label>
-          <select
-            value={fitnessGoal}
-            onChange={(e) => setFitnessGoal(e.target.value)}
-            className="w-full p-2 rounded-lg text-black"
-          >
-            <option value="">Select your fitness goal</option>
-            <option value="lose weight">Lose weight</option>
-            <option value="build muscle">Build muscle</option>
-            <option value="improve endurance">Improve endurance</option>
-          </select>
-        </div>
-
-        <div className="mb-4">
-          <label className="block mb-2">How many days can you workout per week?</label>
-          <input
-            type="range"
-            min="1"
-            max="6"
-            value={workoutDays}
-            onChange={(e) => setWorkoutDays(parseInt(e.target.value))}
-            className="w-full"
-          />
-          <div className="text-center mt-2">{workoutDays} days</div>
-        </div>
-
-        <div className="mb-6">
-          <label className="block mb-2">Equipment</label>
-          <select
-            value={equipment}
-            onChange={(e) => setEquipment(e.target.value)}
-            className="w-full p-2 rounded-lg text-black"
-          >
-            <option value="">Select equipment</option>
-            <option value="cardio">Cardio</option>
-            <option value="strength">Strength</option>
-            <option value="functional">Functional</option>
-            <option value="bodyweight">Bodyweight</option>
-          </select>
-        </div>
-
-        {/* Always show the button */}
         <button
           onClick={handleGenerateWorkout}
-          className="w-full p-4 bg-orange-700 hover:bg-orange-800 rounded-lg font-bold"
+          className="w-full p-4 bg-orange-800 hover:bg-orange-600 rounded-lg font-bold transition-all duration-300"
         >
           GENERATE YOUR WORKOUT
         </button>
 
-        {/* Show warning message if form is submitted but not valid */}
         {showWarning && (
           <p className="text-red-500 mt-2">Please fill out all required fields to generate your workout.</p>
         )}

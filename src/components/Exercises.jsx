@@ -6,18 +6,20 @@ import Loader from './Loader';
 const Exercises = ({ exercises, setExercises, bodyPart }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [exercisesPerPage] = useState(6);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchExercisesData = async () => {
+      setIsLoading(true);
       let exercisesData = [];
-      // console.log(exercises);
       if (bodyPart === 'all') {
         exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
       } else {
         exercisesData = await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`, exerciseOptions);
       }
 
-       setExercises(exercisesData);
+      setExercises(exercisesData);
+      setIsLoading(false);
     };
 
     fetchExercisesData();
@@ -33,11 +35,11 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
     window.scrollTo({ top: 1800, behavior: 'smooth' });
   };
 
-  if (!currentExercises.length) return <Loader />;
+  if (isLoading) return <Loader />;
+  if (!exercises.length) return <p className="text-center my-12 text-xl">No results found. Please try searching for different keywords.</p>;
 
   return (
     <div id="exercises" className="mt-12 p-5">
-     
       <h2 className="text-4xl font-bold text-center mb-12 text-orange-500">Showing Results</h2>
       <div className="flex flex-wrap justify-center gap-14">
         {currentExercises.map((exercise, idx) => (
@@ -45,7 +47,7 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
         ))}
       </div>
       <div className="flex justify-center mt-12">
-        {exercises.length > 9 && (
+        {exercises.length > exercisesPerPage && (
           <div className="flex space-x-2">
             {[...Array(Math.ceil(exercises.length / exercisesPerPage)).keys()].map((number) => (
               <button
