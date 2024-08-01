@@ -25,8 +25,8 @@ const Footer = () => {
           ))}
         </div>
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Golds Gym</h1>
-          <p className="mb-4">© 2024 Golds Gym. All rights reserved.</p>
+          <h1 className="text-2xl font-bold mb-4">Gym Guide Pro</h1>
+          <p className="mb-4">© 2024 Gym-Guide-Pro. All rights reserved.</p>
           <div className="flex justify-center space-x-4">
             <a href="/" className="text-white">
               <FaFacebookF size={24} />
